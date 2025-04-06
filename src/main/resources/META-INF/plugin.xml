@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>com.testsmith.core</id>
+    <name>TestSmith</name>
+    <version>1.0</version>
+    <vendor>TestSmith</vendor>
+    <idea-version since-build="243" until-build="243.*" />
+
+
+    <description>
+        A plugin that generates test files for JS/TS with smart defaults, gutter icons, and file structure mirroring.
+    </description>
+
+    <!-- Core platform and language support -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <actions>
+        <action id="com.testsmith.GenerateTestAction"
+                class="com.testsmith.core.GenerateTestAction"
+                text="Generate Test"
+                description="Generate a test file for this source file">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="com.testsmith.ReverseLookupAction"
+                class="com.testsmith.core.ReverseLookupAction"
+                text="Open Source from Test"
+                description="Jump from test file to its source file">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Settings UI -->
+        <applicationConfigurable
+                id="com.testsmith.settings"
+                displayName="TestSmith"
+                instance="com.testsmith.core.TestSmithConfigurable"/>
+        <applicationService serviceImplementation="com.testsmith.core.TestSmithSettings"/>
+    </extensions>
+</idea-plugin>
